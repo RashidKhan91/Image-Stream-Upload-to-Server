@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">BSTAssignment</string>
+    <string name="capture_image">Capture Image</string>
+    <string name="image_streaming">Image Streaming</string>
+</resources>
