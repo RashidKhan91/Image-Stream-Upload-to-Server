@@ -7,6 +7,7 @@ import com.rashid.bstassignment.data.network.Auth
 import com.rashid.bstassignment.data.network.NetworkApi
 import com.rashid.bstassignment.data.localDataSource.db.BSTDatabase
 import com.rashid.bstassignment.data.localDataSource.dao.UserImageDao
+import com.rashid.bstassignment.data.network.CustomExecutor
 import com.rashid.bstassignment.data.repository.ImagePostRepoImpl
 import com.rashid.bstassignment.data.repository.NetworkStatusDataSource
 import com.rashid.bstassignment.data.repository.NetworkStatusDataSourceImpl
@@ -20,6 +21,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -48,13 +50,14 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideOkHttp(@ApplicationContext context: Context): OkHttpClient {
-//        val executorService = CustomExecutor.createExecutor(3)
+        val executorService = CustomExecutor.createExecutor(3)
         // Set up a custom Dispatcher with the ExecutorService
-//        val dispatcher = Dispatcher(executorService)
+        val dispatcher = Dispatcher(executorService)
         return OkHttpClient.Builder().apply {
             connectTimeout(30, TimeUnit.SECONDS)
             readTimeout(30, TimeUnit.SECONDS)
             writeTimeout(30, TimeUnit.SECONDS)
+            dispatcher(dispatcher)
             addInterceptor { chain ->
                 chain.request().newBuilder()
                     .header("Content-Type", "application/json")
