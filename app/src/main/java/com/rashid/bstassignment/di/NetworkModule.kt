@@ -123,21 +123,6 @@ object NetworkModule {
         return NetworkStatusRepoImp(networkStatusDataSource)
     }
 
-//    @Singleton
-//    @Provides
-//    fun provideObserveNetworkStatusUseCase(
-//        networkStatusRepository: NetworkStatusRepo
-//    ): ObserveNetworkStatusUseCaseImp {
-//        return ObserveNetworkStatusUseCaseImp(networkStatusRepository)
-//    }
-
-//    @Singleton
-//    @Provides
-//    fun provideImagePostUseCase(
-//        imageRepo: ImagePostRepo
-//    ): ImagePostUseCaseImpl {
-//        return ImagePostUseCaseImpl(imageRepo)
-//    }
 
     @Provides
     fun provideWorkManager(@ApplicationContext context: Context): WorkManager {
