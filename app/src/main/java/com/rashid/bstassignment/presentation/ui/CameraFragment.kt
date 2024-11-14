@@ -85,8 +85,8 @@ class CameraFragment : Fragment() {
             requestCameraPermissionLauncher.launch(Manifest.permission.CAMERA)
         }
         cameraFragmentBinding.captureImgCV.setOnClickListener {
-//            captureImage()
-            val captureIntervalMs = 1000L // Capture every second
+            // Capture every second
+            val captureIntervalMs = 1000L
             val executor = Executors.newSingleThreadScheduledExecutor()
 
             executor.scheduleAtFixedRate({
@@ -174,7 +174,7 @@ class CameraFragment : Fragment() {
     }
 
     private fun cancelApiRequest() {
-        apiRequestJob?.cancel() // Cancels the ongoing network request coroutine
+        apiRequestJob?.cancel()
         apiRequestJob = null
     }
 
@@ -291,8 +291,6 @@ class CameraFragment : Fragment() {
         lifecycleScope.launch {
             imageUploadVm.isNetworkConnected.collect { isConnected ->
                 if (isConnected) {
-                    // Handle connected state, check if current image is not uploaded then resend
-                    // it otherwise show message of network is available
                     if(imageUploadVm.getImageStatus(userImages.imageName.toString()) == "Pending"){
                         startApiRequest()
                     }else{
@@ -300,7 +298,6 @@ class CameraFragment : Fragment() {
                     }
 
                 } else {
-                    // Handle disconnected state
                     cameraFragmentBinding.progressBar.visibility = View.GONE
                     cancelApiRequest()
                 }

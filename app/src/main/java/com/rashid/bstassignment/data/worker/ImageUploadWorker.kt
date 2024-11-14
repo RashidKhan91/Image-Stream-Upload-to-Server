@@ -28,7 +28,6 @@ class ImageUploadWorker  @AssistedInject constructor(
                     val imageFile = File(image.imagePath.toString())
                     repository.uploadImageFileWM(imageFile,Constants.BEARER_TOKEN)
                 } catch (e: Exception) {
-                    // Keep the pending image if it fails
                     e.printStackTrace()
                 }
             }
