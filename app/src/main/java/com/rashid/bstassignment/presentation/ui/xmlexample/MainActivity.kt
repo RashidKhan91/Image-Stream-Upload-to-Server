@@ -1,13 +1,9 @@
-package com.rashid.bstassignment.presentation.ui
+package com.rashid.bstassignment.presentation.ui.xmlexample
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.rashid.bstassignment.R
 import com.rashid.bstassignment.databinding.ActivityMainBinding
-import com.rashid.bstassignment.presentation.ui.CameraFragment
-import com.rashid.bstassignment.presentation.viewmodels.ImageUpdateVM
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

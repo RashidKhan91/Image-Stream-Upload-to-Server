@@ -1,7 +1,8 @@
 package com.rashid.bstassignment.utils
 
 object Constants {
-    const val BASE_URL = "https://your_image_url.com/api/"
+//    const val BASE_URL = "https://your_image_url.com/api/"
+    const val BASE_URL = "https://run.mocky.io/"
     const val BST_DATABASE = "bst_database"
     const val STATUS_CODE = "200"
     const val BEARER_TOKEN =

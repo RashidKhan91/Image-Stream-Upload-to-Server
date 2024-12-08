@@ -24,7 +24,7 @@
         android:theme="@style/Theme.BSTAssignment"
         tools:targetApi="34">
         <activity
-            android:name=".presentation.ui.MainActivity"
+            android:name=".presentation.ui.composemedication.MainLogin"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

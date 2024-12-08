@@ -3,18 +3,23 @@ package com.rashid.bstassignment.di
 import android.content.Context
 import androidx.room.Room
 import androidx.work.WorkManager
+import com.rashid.bstassignment.data.localDataSource.dao.DiseaseMedicationDao
 import com.rashid.bstassignment.data.network.Auth
 import com.rashid.bstassignment.data.network.NetworkApi
 import com.rashid.bstassignment.data.localDataSource.db.BSTDatabase
 import com.rashid.bstassignment.data.localDataSource.dao.UserImageDao
 import com.rashid.bstassignment.data.network.CustomExecutor
 import com.rashid.bstassignment.data.repository.ImagePostRepoImpl
+import com.rashid.bstassignment.data.repository.MedicinceRepoImp
+import com.rashid.bstassignment.data.repository.MedicineLocalRepoImp
 import com.rashid.bstassignment.data.repository.NetworkStatusDataSource
 import com.rashid.bstassignment.data.repository.NetworkStatusDataSourceImpl
 import com.rashid.bstassignment.data.repository.NetworkStatusRepoImp
 import com.rashid.bstassignment.domain.repository.NetworkStatusRepo
 import com.rashid.bstassignment.domain.useCases.impl.ObserveNetworkStatusUseCaseImp
 import com.rashid.bstassignment.domain.repository.ImagePostRepo
+import com.rashid.bstassignment.domain.repository.MedicineLocalDbRepo
+import com.rashid.bstassignment.domain.repository.MedicineRepository
 import com.rashid.bstassignment.utils.Constants
 import dagger.Module
 import dagger.Provides
@@ -33,8 +38,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-
-
 
     @Singleton
     @Provides
@@ -97,6 +100,11 @@ object NetworkModule {
     }
 
     @Provides
+    fun provideDiseaseMedicationDao(database: BSTDatabase): DiseaseMedicationDao {
+        return database.diseaseMedicationDao()
+    }
+
+    @Provides
     @Singleton
     fun provideContext(@ApplicationContext context: Context): Context {
         return context
@@ -107,6 +115,19 @@ object NetworkModule {
     fun provideImageUploadRepository(networkApi: NetworkApi, bstDatabase:BSTDatabase) : ImagePostRepo {
         return ImagePostRepoImpl(networkApi,bstDatabase)
     }
+
+    @Singleton
+    @Provides
+    fun provideMedicineLocalRepository( bstDatabase:BSTDatabase) : MedicineLocalDbRepo {
+        return MedicineLocalRepoImp(bstDatabase)
+    }
+
+    @Singleton
+    @Provides
+    fun provideMedicineRepository(networkApi: NetworkApi) : MedicineRepository {
+        return MedicinceRepoImp(networkApi)
+    }
+
 
 
     @Singleton

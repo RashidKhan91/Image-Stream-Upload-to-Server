@@ -36,19 +36,43 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    kotlin {
+        kapt {
+            correctErrorTypes = true
+        }
+    }
     buildFeatures {
         viewBinding = true
+    }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.3"
     }
 }
 
 dependencies {
 
     implementation("androidx.navigation:navigation-fragment-ktx:2.8.2")
+    implementation(libs.androidx.junit.ktx)
     testImplementation("junit:junit:4.13.2")
     testImplementation("io.mockk:mockk:1.13.12")
     testImplementation("androidx.arch.core:core-testing:2.2.0")
-    androidTestImplementation("androidx.test.ext:junit:1.2.1")
+
+    testImplementation("org.mockito:mockito-inline:5.2.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.0")
+    testImplementation("org.mockito:mockito-core:4.0.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.0.0")
+    testImplementation("app.cash.turbine:turbine:0.12.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
+
+    // Test rules and transitive dependencies:
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.7.5")
+// Needed for createComposeRule(), but not for createAndroidComposeRule<YourActivity>():
+    debugImplementation("androidx.compose.ui:ui-test-manifest:1.7.5")
+
 
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.appcompat:appcompat:1.7.0")
@@ -80,6 +104,8 @@ dependencies {
     //Dagger - Hilt
     implementation("com.google.dagger:hilt-android:2.49")
     implementation("androidx.hilt:hilt-work:1.0.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.48")
     kapt("com.google.dagger:hilt-android-compiler:2.48")
     kapt("androidx.hilt:hilt-compiler:1.2.0")
     kapt("com.google.dagger:hilt-compiler:2.48")
@@ -118,4 +144,14 @@ dependencies {
 
     // WorkManager Dependency
     implementation ("androidx.work:work-runtime-ktx:2.8.0")
+
+    implementation ("androidx.compose.ui:ui:1.5.2")
+    implementation ("androidx.compose.material:material:1.5.2")
+    implementation ("androidx.compose.ui:ui-tooling:1.5.2")
+    implementation ("androidx.navigation:navigation-compose:2.7.3")
+    implementation ("androidx.compose.material:material-icons-extended:1.6.0")
+    implementation ("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
+
+    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+
 }

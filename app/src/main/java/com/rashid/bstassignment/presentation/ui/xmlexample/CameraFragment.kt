@@ -1,4 +1,4 @@
-package com.rashid.bstassignment.presentation.ui
+package com.rashid.bstassignment.presentation.ui.xmlexample
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -86,7 +86,7 @@ class CameraFragment : Fragment() {
         }
         cameraFragmentBinding.captureImgCV.setOnClickListener {
             // Capture every second
-            val captureIntervalMs = 1000L
+            val captureIntervalMs = 5000L
             val executor = Executors.newSingleThreadScheduledExecutor()
 
             executor.scheduleAtFixedRate({

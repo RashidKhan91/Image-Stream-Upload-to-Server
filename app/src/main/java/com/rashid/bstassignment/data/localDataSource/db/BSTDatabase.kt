@@ -4,15 +4,22 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.rashid.bstassignment.data.localDataSource.dao.DiseaseMedicationDao
 import com.rashid.bstassignment.data.localDataSource.dao.UserImageDao
+import com.rashid.bstassignment.data.localDataSource.entity.AssociatedDrug
+import com.rashid.bstassignment.data.localDataSource.entity.Converters
+import com.rashid.bstassignment.data.localDataSource.entity.DiseaseMedications
 import com.rashid.bstassignment.data.localDataSource.entity.UserImages
 import com.rashid.bstassignment.utils.Constants
 
 
-@Database(entities = [UserImages::class], version = 1)
+@Database(entities = [UserImages::class, DiseaseMedications::class], version = 1)
+@TypeConverters(Converters::class)
 abstract class BSTDatabase : RoomDatabase() {
 
     abstract fun userImageDao(): UserImageDao
+    abstract fun diseaseMedicationDao(): DiseaseMedicationDao
 
     companion object {
         @Volatile

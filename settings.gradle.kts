@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "BSTAssignment"
+rootProject.name = "ComposeAssignment"
 include(":app")
  
