@@ -13,7 +13,6 @@ import androidx.work.workDataOf
 import com.rashid.bstassignment.data.baseResponse.BaseResponseResult
 import com.rashid.bstassignment.data.localDataSource.entity.ImgServerUploadResp
 import com.rashid.bstassignment.data.localDataSource.entity.UserImages
-import com.rashid.bstassignment.data.worker.ImageUploadWorker
 import com.rashid.bstassignment.domain.useCases.impl.ImagePostUseCase
 import com.rashid.bstassignment.domain.useCases.impl.ObserveNetworkStatusUseCaseImp
 import com.rashid.bstassignment.utils.Constants
@@ -66,7 +65,6 @@ class ImageUpdateVM @Inject constructor(private var imageUseCase: ImagePostUseCa
                 when (baseResult) {
                     is BaseResponseResult.Error -> {
                         _imageState.value = ImageUploadingState.Error(baseResult.rawResponse)
-                        enqueueUploadWork(filePath)
                     }
 
                     is BaseResponseResult.Success -> {
@@ -97,14 +95,7 @@ class ImageUpdateVM @Inject constructor(private var imageUseCase: ImagePostUseCa
           return  imageUseCase.getImageStatus(imageName)
     }
 
-    private fun enqueueUploadWork(filePath: String) {
-        val uploadWorkRequest = OneTimeWorkRequestBuilder<ImageUploadWorker>()
-            .setInputData(workDataOf("file_path" to filePath))
-            .setConstraints(Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build())
-            .build()
 
-        workManager.enqueue(uploadWorkRequest)
-    }
 
     sealed class ImageUploadingState {
         data object Init : ImageUploadingState()

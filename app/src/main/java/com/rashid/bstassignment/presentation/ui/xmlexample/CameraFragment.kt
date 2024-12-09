@@ -57,6 +57,7 @@ class CameraFragment : Fragment() {
     private var imageCapture: ImageCapture? = null
     private var apiRequestJob: Job? = null
     private lateinit var userImages: UserImages
+
     private val requestCameraPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted ->
