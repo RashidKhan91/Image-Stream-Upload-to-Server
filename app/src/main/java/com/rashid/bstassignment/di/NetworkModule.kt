@@ -145,10 +145,5 @@ object NetworkModule {
     }
 
 
-    @Provides
-    fun provideWorkManager(@ApplicationContext context: Context): WorkManager {
-        return WorkManager.getInstance(context)
-    }
-
 
 }

@@ -29,8 +29,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ImageUpdateVM @Inject constructor(private var imageUseCase: ImagePostUseCase,
-                                        private val observeNetworkStatusUseCaseImp: ObserveNetworkStatusUseCaseImp,
-                                        private val workManager: WorkManager
+                                        private val observeNetworkStatusUseCaseImp: ObserveNetworkStatusUseCaseImp
     ) : ViewModel() {
 
     val isNetworkConnected: StateFlow<Boolean> = observeNetworkStatusUseCaseImp()
